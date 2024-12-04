@@ -1,0 +1,26 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../db/database.db"
+}
+
+
+
+model User {
+  id       String  @id @default(uuid())
+  username String  @unique
+  password String
+  role     String    @default("user")
+  createdAt DateTime @default(now())
+  lastLogin DateTime?
+}
+
+model Links {
+  id     Int    @id @default(autoincrement())
+  link String
+  name String
+}
