@@ -1,7 +1,6 @@
 import {Form, useActionData } from "@remix-run/react";
-import type { ActionFunctionArgs, ActionFunction } from "@remix-run/node"; // or cloudflare/deno
+import type { ActionFunction } from "@remix-run/node"; // or cloudflare/deno
 import { redirect } from "@remix-run/node"; // or cloudflare/deno
-// import { z } from "zod"
 
 import { 
   register,
@@ -25,54 +24,9 @@ export const action: ActionFunction = async ({ request, params }) => {
   const password = String(formData.get("password"));
   const password2 = String(formData.get("password2"));
   
-
-  // console.log(`email: ${login} / password: ${password} / password2: ${password2}`)
-
-  // const usernameSchema = z.string()
-  //   .min(6, "Must be at least 8 characters long")
-  //   .max(16, "Must be at most 16 characters long")
-  //   .regex(/[A-Z]/, "Must include at least one uppercase letter")
-  //   .regex(/^\S*$/, "Login cannot contain spaces");
-  //   // .regex(/[0-9]/, "Must include at least one number");
-
-  // const passwordSchema = z.string()
-  //   .min(8, "Must be at least 8 characters long")
-  //   .max(32, "Must be at most 16 characters long")
-  //   .regex(/[A-Z]/, "Must include at least one uppercase letter")
-  //   .regex(/^\S*$/, "Login cannot contain spaces")
-  //   .regex(/[0-9]/, "Must include at least one number")
-  //   .regex(/[!@#$%^&*(),.?":{}|<>]/, "Password must contain at least one special character");
-
-
   let errors: Error = {};
+
   
-  // // Validate input using Zod
-  // const usernameResult = usernameSchema.safeParse( username );
-  // const pass1Result = passwordSchema.safeParse( password );
-
-  // if (!usernameResult.success) {
-  //   // interface of errors.login
-  //   const validationErrors = usernameResult.error.flatten();
-  //   errors.username = validationErrors.formErrors;
-
-  // } 
-  // if (!pass1Result.success) {
-  //   // interface of errors.login
-  //   const validationErrors = pass1Result.error.flatten();
-  //   errors.password = validationErrors.formErrors;
-  // }
-  // if (password !== password2) {
-  //   errors.password2 = "Password doesn't match";      
-  // }
-
-  // if (Object.keys(errors).length > 0) {
-  //   return ({ errors });
-  // }
-  // // Redirect to dashboard if validation is successful
-  // if (usernameResult.success && pass1Result.success && password === password2) {
-  //   register({username , password })
-  //   return redirect("/");
-  // }
     // Validate username
   const usernameResult = validateUsername(username);
   if (!usernameResult.success) {

@@ -1,6 +1,6 @@
 import { redirect } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
-import { getUser, destroyUserSession } from "~/utils/session.server"; // Your session utility to get the logged-in user
+import { useLoaderData } from "@remix-run/react";
+import { getUser, destroyUserSession } from "~/utils/session.server";
 import { db } from "~/utils/db.server";
 
 export const loader = async ({ request }: { request: Request }) => {
@@ -8,8 +8,6 @@ export const loader = async ({ request }: { request: Request }) => {
   if (!user) {
     return redirect("/login");
   }
-  // return { user }
-
   const links = await db.links.findMany({
     select: {
       id: true,

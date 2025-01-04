@@ -1,7 +1,7 @@
 import { redirect, ActionFunction, LoaderFunction } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
 import { getUser } from "~/utils/session.server";
-import { deleteUser } from "~/utils/session.server";
+import { deleteUser } from "~/utils/user.server";
 
 
 

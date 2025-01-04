@@ -1,13 +1,12 @@
 import { LoaderFunction, redirect, ActionFunction } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import { getUser } from "~/utils/session.server";
-// import { db } from "~/utils/db.server";
+import { register } from "~/utils/user.server";
 import { 
-  register,
   validateUsername, 
   validatePassword, 
   comparePasswords 
-} from "~/utils/session.server";
+} from "~/utils/auth.server";
 
 
 
@@ -61,14 +60,12 @@ export const action: ActionFunction = async ({ request }) => {
   if (!["admin", "user"].includes(role)) {
     errors.role = "Invalid role selected";
   }
-
   // If errors exist, return them to the form
   if (Object.keys(errors).length > 0) {
     return { errors };
   }
-
+  
   // Create user in the database
-
   try {
     await register({ username, password, role });
   } catch (error) {

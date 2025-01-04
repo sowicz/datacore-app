@@ -4,8 +4,8 @@ import { getUser } from "~/utils/session.server";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Dashboard" },
+    { name: "App", content: "Welcome to dashboard!" },
   ];
 };
 

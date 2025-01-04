@@ -1,7 +1,8 @@
-import { LoaderFunction, redirect, ActionFunction, ActionFunctionArgs } from "@remix-run/node";
-import { useLoaderData, Form, useActionData } from "@remix-run/react";
+import { LoaderFunction, redirect, ActionFunction } from "@remix-run/node";
+import { Form, useActionData } from "@remix-run/react";
 import { getUser } from "~/utils/session.server";
 import { db } from "~/utils/db.server";
+import { AddLink } from "~/utils/links.server";
 
 
 interface Error {
@@ -18,38 +19,26 @@ export const loader: LoaderFunction = async ({request}) => {
 };
 
 
-
-
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const link = formData.get("link") as string;
   const nameLink = formData.get("nameLink") as string;
-
 
   let errors : Error = {}
 
   if (!link.includes(".")) {
     errors.linkError = "Not valid link to website"
   }
-
   if(nameLink.length > 24 || nameLink.length < 3) {
     errors.nameError = "Name length can be minimum 3 and maximum 24 characters"
   }
-  
   // Return errors if validation fails
   if (Object.keys(errors).length > 0) {
     return { errors };
   } 
-
   // Save the data to the database
   try {
-    await db.links.create({
-      data: {
-        link,
-        name: nameLink,
-      },
-    });
-    return redirect("/dashboard/links/list");
+    await AddLink({link, nameLink});
   } catch (error) {
     return {
       errors: {
@@ -57,6 +46,7 @@ export const action: ActionFunction = async ({ request }) => {
       },
     };
   }
+  return redirect("/dashboard/links/list");
 
 };
 

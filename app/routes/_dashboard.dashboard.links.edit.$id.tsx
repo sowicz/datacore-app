@@ -3,6 +3,7 @@ import { useLoaderData, Form, useActionData, } from "@remix-run/react";
 import { useState } from "react"; 
 import { getUser } from "~/utils/session.server";
 import { db } from "~/utils/db.server";
+import { EditLink } from "~/utils/links.server";
 
 
 
@@ -27,12 +28,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   const linktoEdit = await db.links.findUnique({
     where: { id },
   });
-  console.log(linktoEdit)
-
   if (!linktoEdit) {
     throw new Response("Link not found", { status: 404 });
   }
-
   return { user, linktoEdit };
 };
 
@@ -42,15 +40,12 @@ export const action: ActionFunction = async ({ request, params }) => {
   const formData = await request.formData();
   const link = formData.get("link") as string;
   const nameLink = formData.get("nameLink") as string;
-  // const role = formData.get("role") as string;
-
 
   const id = Number(params.id); // Convert `id` to a number
   if (isNaN(id)) {
     throw new Response("Invalid ID", { status: 400 });
   }
   let errors: Error = {};
-
 
   // Validation
   if (!link.includes(".")) {
@@ -63,18 +58,9 @@ export const action: ActionFunction = async ({ request, params }) => {
   if (Object.keys(errors).length > 0) {
     return { errors };
   }
-
-
   // Update the link in the database
   try {
-    await db.links.update({
-      where: { id },
-      data: {
-        link,
-        name: nameLink,
-      },
-    });
-    return redirect("/dashboard/links/list");
+    await EditLink({id, link, nameLink})
   } catch (error) {
     return {
       errors: {
@@ -82,6 +68,7 @@ export const action: ActionFunction = async ({ request, params }) => {
       },
     };
   }
+  return redirect("/dashboard/links/list");
 };
 
 

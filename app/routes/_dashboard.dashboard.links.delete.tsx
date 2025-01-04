@@ -1,7 +1,7 @@
 import { redirect, ActionFunction, LoaderFunction } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
 import { getUser } from "~/utils/session.server";
-import { deleteLink } from "~/utils/session.server";
+import { deleteLink } from "~/utils/links.server";
 
 
 
@@ -19,12 +19,8 @@ export const action: ActionFunction = async ({ request }) => {
   if (!result.success) {
     return { error: result.error };
   }
-
   return { message: "Successfully deleted the link." };
-  
 };
-
-
 
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -35,8 +31,6 @@ export const loader: LoaderFunction = async ({ request }) => {
     return null
   }
 }
-
-
 
 
 

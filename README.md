@@ -1,40 +1,64 @@
-# Welcome to Remix!
+# Dashboard Management Application
 
-- 📖 [Remix docs](https://remix.run/docs)
+A web-based dashboard built with [RemixJS](https://remix.run), designed to simplify the management of links, users, check Docker containers, and in the future MQTT brokers. This application is user-friendly, and ideal for administrative tasks.
 
-## Development
+## Features
 
-Run the dev server:
+### 1. **Link Management**
+- Add, edit, and delete links to internal websites/apps.
+- User-friendly forms for managing your collection of links.
 
-```shellscript
-npm run dev
-```
+### 2. **User Management**
+- Add, edit, and delete users.
+- Manage roles and permissions for platform users.
 
-## Deployment
+### 3. **Docker Containers Overview**
+- View a list of running Docker containers.
+- Monitor container statuses 
 
-First, build your app for production:
+### 4. **MQTT Broker User Management (planned)** 
+- Manage users and permissions for MQTT brokers like EMQX or Mosquitto.
+- Support for adding, editing, and removing MQTT users.
 
-```sh
-npm run build
-```
+## Tech Stack
+- **Frontend**: [RemixJS](https://remix.run)
+- **Backend**: Node.js with Remix server capabilities
+- **Database**: [SQLite](https://www.sqlite.org/index.html) 
+- **Containerization**: Docker
 
-Then run the app in production mode:
+## Installation
 
-```sh
-npm start
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/your-repo-name.git
+   cd your-repo-name
+   ```
+2. Install dependencies:
+    ```
+    npm install
+    ```
+3. Configure environment variables: Create a .env file in the root of the project and define the required variables:
+    ```
+    NODE_ENV="development"
+    ADMIN_PASSWORD=
+    ```
+4. Seed the Prisma database: Before starting the development server, initialize the database with seed data:
+    ```
+    npm run prisma:seed
+    ```
+    Please don't have opened db while seeding because seed will fail.
+     
+5. Start the development server:
+    ```
+    npm run dev
+    ```
 
-Now you'll need to pick a host to deploy it to.
+## Contributing
+Contributions are welcome! 
+Feel free to submit issues, feature requests, or pull requests to improve this application.
 
-### DIY
+### Future Plans
+- Integration with EMQX or Mosquitto for MQTT user management.
+- Enhanced Docker container management capabilities.
 
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+Made with ❤️ using RemixJS.

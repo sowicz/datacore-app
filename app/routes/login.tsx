@@ -3,12 +3,9 @@ import { Form, useActionData } from "@remix-run/react";
 import { login, createUserSession, getUser } from "~/utils/session.server";
 
 
-
-
 type ActionData = {
   error?: string;
 };
-
 
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -16,7 +13,6 @@ export const loader: LoaderFunction = async ({ request }) => {
   if (user) return redirect("/dashboard/");
   return null;
 };
-
 
 
 export const action: ActionFunction = async ({ request }) => {
@@ -35,8 +31,6 @@ export const action: ActionFunction = async ({ request }) => {
 
   return createUserSession(user.id, "/dashboard");
 };
-
-
 
 
 export default function Login() {

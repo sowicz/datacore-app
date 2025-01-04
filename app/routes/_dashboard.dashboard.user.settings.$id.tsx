@@ -1,13 +1,13 @@
-import { LoaderFunction, redirect, ActionFunction, ActionFunctionArgs } from "@remix-run/node";
+import { LoaderFunction, redirect, ActionFunction } from "@remix-run/node";
 import { useLoaderData, Form, useActionData } from "@remix-run/react";
-import { getUser } from "~/utils/session.server";
+import { getUser  } from "~/utils/session.server";
+import { changePassword } from "~/utils/user.server";
 import { db } from "~/utils/db.server";
 import { 
-  changePassword, 
   validatePassword, 
   comparePasswords,
   validateActualPassword
-} from "~/utils/session.server";
+} from "~/utils/auth.server";
 
 
 
