@@ -30,7 +30,7 @@ A web-based dashboard built with [RemixJS](https://remix.run), designed to simpl
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/your-repo-name.git
+   git clone https://github.com/sowicz/remixAdminApp.git
    cd your-repo-name
    ```
 2. Install dependencies:
@@ -47,7 +47,7 @@ A web-based dashboard built with [RemixJS](https://remix.run), designed to simpl
     npm run prisma:seed
     ```
     Please don't have opened db while seeding because seed will fail.
-     
+
 5. Start the development server:
     ```
     npm run dev
